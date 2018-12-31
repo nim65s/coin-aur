@@ -5,14 +5,14 @@
 # Contributor: mickele
 # Contributor: marcus fritzsch <fritschy@googlemail.com>
 
-pkgname=coin
+pkgname=('coin' 'coin-docs')
 pkgver=3.1.3
 pkgrel=17
 pkgdesc='A high-level 3D graphics toolkit on top of OpenGL'
 url='http://www.coin3d.org/'
 license=('GPL')
 arch=('i686' 'x86_64')
-depends=('libgl' 'expat')
+depends=('libgl' 'expat' 'libsm')
 makedepends=('doxygen')
 optdepends=('openal: sound/dynamic linking support'
             'fontconfig: dynamic linking support'
@@ -75,7 +75,7 @@ build() {
 	make
 }
 
-package() {
+package_coin() {
 	cd Coin-${pkgver}
 
 	make DESTDIR="${pkgdir}" install
@@ -86,5 +86,20 @@ package() {
 	done
 
 	rm -f "$pkgdir/usr/share/man/man3/_build"*
+	rm -rf "$pkgdir/usr/share/doc"
 }
 
+package_coin-docs() {
+	arch=('any')
+	depends=()
+	cd Coin-${pkgver}
+
+	make DESTDIR="${pkgdir}" install
+
+	rm -rf "$pkgdir/usr/share/man"
+	rm -rf "$pkgdir/usr/share/aclocal"
+	rm -rf "$pkgdir/usr/share/Coin"
+	rm -rf "$pkgdir/usr/lib"
+	rm -rf "$pkgdir/usr/include"
+	rm -rf "$pkgdir/usr/bin"
+}

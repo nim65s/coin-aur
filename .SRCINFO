@@ -9,6 +9,7 @@ pkgbase = coin
 	makedepends = doxygen
 	depends = libgl
 	depends = expat
+	depends = libsm
 	optdepends = openal: sound/dynamic linking support
 	optdepends = fontconfig: dynamic linking support
 	optdepends = zlib: dynamic linking support
@@ -25,4 +26,8 @@ pkgbase = coin
 	sha256sums = ab939e75dd5e9be87781ab6c9f4c69c9a85c6d6c6c554249fbd3f4e646b4a7de
 
 pkgname = coin
+
+pkgname = coin-docs
+	arch = any
+	depends = 
 
